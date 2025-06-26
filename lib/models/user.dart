@@ -1,5 +1,3 @@
-// lib/models/user.dart
-
 /// Represents a User object from the API response.
 class User {
   /// Unique identifier for the user.

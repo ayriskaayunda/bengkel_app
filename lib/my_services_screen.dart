@@ -1,9 +1,9 @@
 // lib/screens/my_services_screen.dart
-import 'package:flutter/material.dart';
 import 'package:bengkel_app/constant/app_color.dart';
-import 'package:bengkel_app/services/api_service.dart';
 import 'package:bengkel_app/models/servis.dart'; // Import the Servis model
 import 'package:bengkel_app/models/servis_list_response.dart'; // Import response model
+import 'package:bengkel_app/services/api_service.dart';
+import 'package:flutter/material.dart';
 
 /// Screen to display the user's current and pending service requests.
 class MyServicesScreen extends StatefulWidget {
@@ -31,7 +31,7 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
     });
   }
 
-  /// Deletes a specific service by its ID.
+  /// ini untuk delete
   Future<void> _deleteService(int servisId) async {
     bool? confirmDelete = await showDialog<bool>(
       context: context,
@@ -46,7 +46,10 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
             ),
             TextButton(
               onPressed: () => Navigator.of(context).pop(true),
-              child: const Text('Delete', style: TextStyle(color: Colors.red)),
+              child: const Text(
+                'Delete',
+                style: TextStyle(color: AppColor.beige6),
+              ),
             ),
           ],
         );
@@ -66,7 +69,7 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
               backgroundColor: Colors.green,
             ),
           );
-          _fetchServices(); // Refresh the list after deletion
+          _fetchServices(); // untuk refresh setelah delete
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
@@ -86,7 +89,7 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
     }
   }
 
-  /// Shows a dialog to update the status of a service.
+  // ini untuk menampilkan dialog untuk mmemperbarui layanan
   Future<void> _updateServiceStatus(int servisId, String currentStatus) async {
     String? selectedStatus = currentStatus; // Initialize with current status
     await showDialog(
@@ -102,7 +105,11 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
               }
             },
             items:
-                <String>['Menunggu', 'Diproses', 'Selesai'] // Possible statuses
+                <String>[
+                      'Menunggu',
+                      'Diproses',
+                      'Selesai',
+                    ] // untuk status motor/mobil
                     .map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
@@ -139,7 +146,7 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
                           backgroundColor: Colors.green,
                         ),
                       );
-                      _fetchServices(); // Refresh the list
+                      _fetchServices(); // Refresh
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
@@ -179,8 +186,9 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('My Services'),
-        backgroundColor: AppColor.blueButton,
+        title: const Text('Service status'),
+        centerTitle: true,
+        backgroundColor: AppColor.beige1,
         foregroundColor: Colors.white,
         actions: [
           IconButton(
@@ -190,6 +198,7 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
           ),
         ],
       ),
+      backgroundColor: AppColor.beige5,
       body: FutureBuilder<ServisListResponse?>(
         future: _servicesFuture,
         builder: (context, snapshot) {
@@ -259,7 +268,7 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
                             ElevatedButton(
                               onPressed: () => _deleteService(servis.id!),
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.red,
+                                backgroundColor: Colors.brown,
                                 foregroundColor: Colors.white,
                               ),
                               child: const Text('Delete'),
@@ -278,7 +287,7 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
     );
   }
 
-  // Helper function to get status color
+  // ini fungsi untuk mendapatkan warna status
   Color _getStatusColor(String? status) {
     switch (status) {
       case 'Menunggu':

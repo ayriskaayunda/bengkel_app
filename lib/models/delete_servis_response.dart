@@ -1,5 +1,3 @@
-// lib/models/delete_servis_response.dart
-
 /// Represents the response structure for deleting a service.
 class DeleteServisResponse {
   /// A message indicating the result of the deletion.

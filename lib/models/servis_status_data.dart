@@ -1,6 +1,3 @@
-// lib/models/servis_status_data.dart
-
-/// Represents the data containing only the status of a service.
 class ServisStatusData {
   /// The status of the service (e.g., "Selesai").
   final String? status;

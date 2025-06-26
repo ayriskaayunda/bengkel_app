@@ -1,32 +1,26 @@
-// lib/screens/register_screen_api.dart
 import 'package:bengkel_app/constant/app_color.dart';
+import 'package:bengkel_app/models/register_response.dart';
+import 'package:bengkel_app/services/api_service.dart';
 import 'package:flutter/material.dart';
-
-// Import your API service and models
-import 'package:bengkel_app/services/api_service.dart'; // Adjust if your project structure is different
-import 'package:bengkel_app/models/register_response.dart'; // Import the RegisterResponse model
 
 class RegisterScreenApi extends StatefulWidget {
   const RegisterScreenApi({super.key});
-  static const String id =
-      "/register_screen_api"; // Define a route ID for navigation
+  static const String id = "/register_screen_api";
 
   @override
   State<RegisterScreenApi> createState() => _RegisterScreenApiState();
 }
 
 class _RegisterScreenApiState extends State<RegisterScreenApi> {
-  // Instantiate the API service
-  final ApiService _apiService =
-      ApiService(); // Use ApiService instead of UserService
+  final ApiService _apiService = ApiService();
 
-  // State variables for UI and form handling
-  bool isVisibility = false; // For password visibility toggle
-  bool isLoading = false; // To show a loading indicator during API calls
+  // untuk variable ui dan menghandle
+  bool isVisibility = false;
+  bool isLoading = false;
   final TextEditingController emailController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final _formKey = GlobalKey<FormState>(); // GlobalKey for form validation
+  final _formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
@@ -36,15 +30,14 @@ class _RegisterScreenApiState extends State<RegisterScreenApi> {
     super.dispose();
   }
 
-  /// Handles the registration process by calling the API service.
+  /// ini untuk menghandle proses registrasi dari APi servis
   Future<void> _handleRegister() async {
-    // Validate form fields
     if (!_formKey.currentState!.validate()) {
-      return; // If validation fails, stop here
+      return;
     }
 
     setState(() {
-      isLoading = true; // Show loading indicator
+      isLoading = true; // untuk menampilkan loading
     });
 
     try {
@@ -55,8 +48,8 @@ class _RegisterScreenApiState extends State<RegisterScreenApi> {
       );
 
       if (response != null && response.data?.token != null) {
-        // Registration successful
-        // Token is automatically saved by ApiService internally now.
+        // Registrasi berhasil
+        //  token otomatis save dari API
 
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
@@ -65,10 +58,10 @@ class _RegisterScreenApiState extends State<RegisterScreenApi> {
           ),
         );
 
-        // Navigate back to the login screen
+        // Navigator untuk kembali ke login
         Navigator.pop(context);
       } else {
-        // Registration failed (e.g., email already taken, validation errors from API)
+        // Registrasi gagal ( E,G , email sudah bisa , validasi error dari API)
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
@@ -88,7 +81,7 @@ class _RegisterScreenApiState extends State<RegisterScreenApi> {
       );
     } finally {
       setState(() {
-        isLoading = false; // Hide loading indicator
+        isLoading = false;
       });
     }
   }
@@ -97,25 +90,20 @@ class _RegisterScreenApiState extends State<RegisterScreenApi> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Form(
-        key: _formKey, // Assign the form key
-        child: Stack(
-          children: [
-            buildBackground(), // Renders the background image
-            buildLayer(), // Renders the main content layer
-          ],
-        ),
+        key: _formKey,
+        child: Stack(children: [buildBackground(), buildLayer()]),
       ),
     );
   }
 
-  /// Builds the main content layer including text fields and buttons.
+  /// menggunakan text fields dan tombol.
   SafeArea buildLayer() {
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Center(
           child: SingleChildScrollView(
-            // Added SingleChildScrollView to prevent overflow
+            // menggunakan SingleChildScrollView agar menghindari overflow
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -124,8 +112,8 @@ class _RegisterScreenApiState extends State<RegisterScreenApi> {
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ), // Added white color
+                    color: Color.fromARGB(255, 94, 78, 73),
+                  ),
                 ),
                 height(12),
                 Text(
@@ -150,7 +138,7 @@ class _RegisterScreenApiState extends State<RegisterScreenApi> {
                   },
                 ),
                 height(16),
-                buildTitle("Name"), // Changed "Nama" to "Name" for consistency
+                buildTitle("Name"),
                 height(12),
                 buildTextField(
                   hintText: "Enter your name",
@@ -174,7 +162,7 @@ class _RegisterScreenApiState extends State<RegisterScreenApi> {
                       return 'Please enter your password';
                     }
                     if (value.length < 6) {
-                      // Example: Minimum password length
+                      // Minimal password
                       return 'Password must be at least 6 characters long';
                     }
                     return null;
@@ -185,7 +173,6 @@ class _RegisterScreenApiState extends State<RegisterScreenApi> {
                   alignment: Alignment.centerRight,
                   child: TextButton(
                     onPressed: () {
-                      // TODO: Implement forgot password functionality if applicable for registration flow
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
                           content: Text(
@@ -195,7 +182,7 @@ class _RegisterScreenApiState extends State<RegisterScreenApi> {
                       );
                     },
                     child: Text(
-                      "Forgot Password?", // This might not be relevant on a registration screen
+                      "Forgot Password?",
                       style: TextStyle(
                         fontSize: 12,
                         color: AppColor.orange,
@@ -211,9 +198,9 @@ class _RegisterScreenApiState extends State<RegisterScreenApi> {
                   child: ElevatedButton(
                     onPressed: isLoading
                         ? null
-                        : _handleRegister, // Disable button when loading
+                        : _handleRegister, // non aktifkan tombol saat loading
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColor.blueButton,
+                      backgroundColor: AppColor.beige2,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(6),
                       ),
@@ -221,13 +208,13 @@ class _RegisterScreenApiState extends State<RegisterScreenApi> {
                     child: isLoading
                         ? const CircularProgressIndicator(
                             color: Colors.white,
-                          ) // Show loading indicator
+                          ) // tampilkan loading
                         : const Text(
                             "Register",
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
-                              color: Colors.white,
+                              color: Color.fromARGB(255, 235, 230, 229),
                             ),
                           ),
                   ),
@@ -242,7 +229,7 @@ class _RegisterScreenApiState extends State<RegisterScreenApi> {
                     ),
                     TextButton(
                       onPressed: () {
-                        // Navigate back to the login screen
+                        // Navigator untuk kembali ke halaman login
                         Navigator.pop(context);
                       },
                       child: Text(
@@ -264,29 +251,24 @@ class _RegisterScreenApiState extends State<RegisterScreenApi> {
     );
   }
 
-  /// Builds the background container with an image.
+  /// untuk background
   Container buildBackground() {
     return Container(
       height: double.infinity,
       width: double.infinity,
       decoration: const BoxDecoration(
         image: DecorationImage(
-          image: AssetImage(
-            "assets/images/background.png",
-          ), // Ensure this asset is correctly configured in pubspec.yaml
+          image: AssetImage("assets/images/background8.png"),
           fit: BoxFit.cover,
         ),
       ),
     );
   }
 
-  /// Helper widget for vertical spacing.
   SizedBox height(double height) => SizedBox(height: height);
 
-  /// Helper widget for horizontal spacing.
   SizedBox width(double width) => SizedBox(width: width);
 
-  /// Builds a title text for input fields.
   Widget buildTitle(String text) {
     return Row(
       children: [
@@ -295,29 +277,25 @@ class _RegisterScreenApiState extends State<RegisterScreenApi> {
     );
   }
 
-  /// Builds a customizable text field.
+  /// menggunakan text formfield
   Widget buildTextField({
     String? hintText,
     bool isPassword = false,
     required TextEditingController controller,
-    TextInputType keyboardType = TextInputType.text, // Default to text
-    String? Function(String?)? validator, // Validator function
+    TextInputType keyboardType = TextInputType.text,
+    String? Function(String?)? validator, // Validator fungsi
   }) {
     return TextFormField(
       controller: controller,
-      keyboardType: keyboardType, // Set keyboard type
+      keyboardType: keyboardType, // ini keyboard type
       validator: validator, // Assign validator
-      obscureText: isPassword
-          ? !isVisibility
-          : false, // Use !isVisibility for obscureText
-      style: const TextStyle(color: Colors.black), // Set text color to black
+      obscureText: isPassword ? !isVisibility : false,
+      style: const TextStyle(color: Colors.black),
       decoration: InputDecoration(
         hintText: hintText,
-        hintStyle: TextStyle(
-          color: Colors.black.withOpacity(0.5),
-        ), // Hint text color
+        hintStyle: TextStyle(color: Colors.black.withOpacity(0.5)),
         filled: true,
-        fillColor: Colors.white, // Background color for the text field
+        fillColor: Colors.transparent,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(32),
           borderSide: BorderSide(
@@ -354,9 +332,7 @@ class _RegisterScreenApiState extends State<RegisterScreenApi> {
                   });
                 },
                 icon: Icon(
-                  isVisibility
-                      ? Icons.visibility
-                      : Icons.visibility_off, // Corrected icon logic
+                  isVisibility ? Icons.visibility : Icons.visibility_off,
                   color: AppColor.gray88,
                 ),
               )

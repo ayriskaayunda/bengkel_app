@@ -6,7 +6,7 @@ class Servis {
   final int? id;
 
   /// The ID of the user associated with this service.
-  final int? userId;
+  final String? userId;
 
   /// The type of vehicle for the service.
   final String? vehicleType;
@@ -36,9 +36,13 @@ class Servis {
 
   /// Factory constructor to create a Servis object from a JSON map.
   factory Servis.fromJson(Map<String, dynamic> json) {
+    json.forEach((key, value) {
+      print('Key: $key, Value: $value, Type: ${value.runtimeType}');
+    });
+
     return Servis(
       id: json['id'] as int?,
-      userId: json['user_id'] as int?,
+      userId: json['user_id']?.toString(),
       vehicleType: json['vehicle_type'] as String?,
       complaint: json['complaint'] as String?,
       status: json['status'] as String?,

@@ -1,4 +1,3 @@
-// lib/models/update_servis_status_response.dart
 import 'servis.dart'; // Import Servis model
 
 /// Represents the response structure for updating a service status.

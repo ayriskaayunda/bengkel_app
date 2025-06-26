@@ -1,5 +1,3 @@
-// lib/models/booking_servis_data.dart
-
 /// Represents the data for a service booking.
 class BookingServisData {
   /// Unique identifier for the booking.

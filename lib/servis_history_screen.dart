@@ -1,9 +1,9 @@
 // lib/screens/servis_history_screen.dart
-import 'package:flutter/material.dart';
 import 'package:bengkel_app/constant/app_color.dart';
-import 'package:bengkel_app/services/api_service.dart';
 import 'package:bengkel_app/models/servis.dart'; // Import the Servis model
 import 'package:bengkel_app/models/servis_history_response.dart'; // Import response model
+import 'package:bengkel_app/services/api_service.dart';
+import 'package:flutter/material.dart';
 
 /// Screen to display the user's completed service history.
 class ServisHistoryScreen extends StatefulWidget {
@@ -24,7 +24,6 @@ class _ServisHistoryScreenState extends State<ServisHistoryScreen> {
     _fetchServisHistory();
   }
 
-  /// Fetches service history from the API.
   Future<void> _fetchServisHistory() async {
     setState(() {
       _historyFuture = _apiService.getServisHistory();
@@ -36,7 +35,8 @@ class _ServisHistoryScreenState extends State<ServisHistoryScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Service History'),
-        backgroundColor: AppColor.blueButton,
+        centerTitle: true,
+        backgroundColor: AppColor.beige1,
         foregroundColor: Colors.white,
         actions: [
           IconButton(
@@ -46,6 +46,7 @@ class _ServisHistoryScreenState extends State<ServisHistoryScreen> {
           ),
         ],
       ),
+      backgroundColor: AppColor.beige5,
       body: FutureBuilder<ServisHistoryResponse?>(
         future: _historyFuture,
         builder: (context, snapshot) {

@@ -1,4 +1,3 @@
-// lib/models/auth_data.dart
 import 'user.dart'; // Import the User model
 
 /// Represents authentication data including a token and user information.

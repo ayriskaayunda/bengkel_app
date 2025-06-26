@@ -1,4 +1,3 @@
-// lib/models/servis_list_response.dart
 import 'servis.dart'; // Import Servis model
 
 /// Represents the response structure for listing multiple services.

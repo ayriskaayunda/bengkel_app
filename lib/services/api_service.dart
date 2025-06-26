@@ -1,5 +1,5 @@
-// lib/services/api_service.dart
 import 'dart:convert';
+
 import 'package:bengkel_app/models/booking_servis_response.dart';
 import 'package:bengkel_app/models/delete_servis_response.dart';
 import 'package:bengkel_app/models/login_response.dart';
@@ -12,20 +12,15 @@ import 'package:bengkel_app/models/single_servis_status.dart';
 import 'package:bengkel_app/services/token_manager.dart';
 import 'package:http/http.dart' as http;
 
-/// Adjust this path based on your actual project structure.
-/// Example: if your project name is 'my_bengkel_app', it would be:
-/// import 'package:my_bengkel_app/models/user.dart';
-
-/// A service class to handle all API interactions with the Bengkel backend.
+/// kelas servis untuk menangani semua interaksi API dengan backend bengkel
 class ApiService {
-  // Base URL for your API.
-  static const String _baseUrl = 'http://127.0.0.1:8000/api';
+  static const String _baseUrl = "https://appbengkel.mobileprojp.com";
 
-  // Instantiate TokenManager
+  //  TokenManager
   final TokenManager _tokenManager = TokenManager();
 
   /// Helper function to handle common API request logic and error reporting.
-  /// It takes the URL, HTTP method, body, and returns the decoded JSON.
+  /// menerima URL endpoint, metode HTTP, body request, dan mengembalikan
   /// The token is now automatically retrieved from TokenManager.
   Future<Map<String, dynamic>?> _sendRequest({
     required String endpoint,
@@ -34,7 +29,7 @@ class ApiService {
     bool requiresAuth =
         false, // New parameter to indicate if auth token is needed
   }) async {
-    final uri = Uri.parse('$_baseUrl/$endpoint');
+    final uri = Uri.parse('$_baseUrl/api/$endpoint');
     final Map<String, String> headers = {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
@@ -57,6 +52,8 @@ class ApiService {
       switch (method.toUpperCase()) {
         case 'GET':
           response = await http.get(uri, headers: headers);
+
+          print(response.body);
           break;
         case 'POST':
           response = await http.post(
@@ -200,6 +197,7 @@ class ApiService {
       method: 'GET',
       requiresAuth: true,
     );
+    print(responseJson);
 
     if (responseJson != null) {
       return ServisListResponse.fromJson(responseJson);

@@ -1,8 +1,8 @@
 // lib/screens/booking_servis_screen.dart
-import 'package:flutter/material.dart';
 import 'package:bengkel_app/constant/app_color.dart';
-import 'package:bengkel_app/services/api_service.dart';
 import 'package:bengkel_app/models/booking_servis_response.dart';
+import 'package:bengkel_app/services/api_service.dart';
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart'; // For date formatting
 
 class BookingServisScreen extends StatefulWidget {
@@ -97,7 +97,8 @@ class _BookingServisScreenState extends State<BookingServisScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Book a Service'),
-        backgroundColor: AppColor.blueButton,
+        centerTitle: true,
+        backgroundColor: AppColor.beige8,
         foregroundColor: Colors.white,
       ),
       body: Form(
@@ -117,17 +118,17 @@ class _BookingServisScreenState extends State<BookingServisScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Text(
-                  "New Service Booking",
+                  "Add Service Booking",
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    color: Color.fromARGB(255, 83, 73, 69),
                   ),
                 ),
                 height(12),
                 Text(
                   "Fill in the details for your service appointment",
-                  style: TextStyle(fontSize: 14, color: AppColor.gray88),
+                  style: TextStyle(fontSize: 14, color: AppColor.beige1),
                   textAlign: TextAlign.center,
                 ),
                 height(24),
@@ -172,7 +173,7 @@ class _BookingServisScreenState extends State<BookingServisScreen> {
                   child: ElevatedButton(
                     onPressed: _isLoading ? null : _handleBookingServis,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColor.blueButton,
+                      backgroundColor: AppColor.beige8,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(6),
                       ),
@@ -203,14 +204,14 @@ class _BookingServisScreenState extends State<BookingServisScreen> {
       width: double.infinity,
       decoration: const BoxDecoration(
         image: DecorationImage(
-          image: AssetImage("assets/images/background.png"),
+          image: AssetImage("assets/images/background6.jpg"),
           fit: BoxFit.cover,
         ),
       ),
     );
   }
 
-  // Corrected buildTextField: Removed isPassword and related isVisibility logic
+  // untuk logic nya
   Widget buildTextField({
     String? hintText,
     required TextEditingController controller,
@@ -222,14 +223,14 @@ class _BookingServisScreenState extends State<BookingServisScreen> {
       controller: controller,
       keyboardType: keyboardType,
       validator: validator,
-      obscureText: false, // Always false as it's not a password field
+      obscureText: false,
       maxLines: maxLines,
       style: const TextStyle(color: Colors.black),
       decoration: InputDecoration(
         hintText: hintText,
         hintStyle: TextStyle(color: Colors.black.withOpacity(0.5)),
         filled: true,
-        fillColor: Colors.white,
+        fillColor: Colors.white38,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(32),
           borderSide: BorderSide(
@@ -256,7 +257,6 @@ class _BookingServisScreenState extends State<BookingServisScreen> {
           borderRadius: BorderRadius.circular(32),
           borderSide: const BorderSide(color: Colors.red, width: 2.0),
         ),
-        // Suffix icon for password visibility is removed as it's not a password field
       ),
     );
   }
@@ -268,8 +268,8 @@ class _BookingServisScreenState extends State<BookingServisScreen> {
   }) {
     return TextFormField(
       controller: controller,
-      readOnly: true, // Make it non-editable
-      onTap: onTap, // Call the date picker on tap
+      readOnly: true,
+      onTap: onTap,
       validator: (value) {
         if (value == null || value.isEmpty) {
           return 'Please select a date';
@@ -281,7 +281,7 @@ class _BookingServisScreenState extends State<BookingServisScreen> {
         hintText: hintText,
         hintStyle: TextStyle(color: Colors.black.withOpacity(0.5)),
         filled: true,
-        fillColor: Colors.white,
+        fillColor: Colors.white38,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(32),
           borderSide: BorderSide(

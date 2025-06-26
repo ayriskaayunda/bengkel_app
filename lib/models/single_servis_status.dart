@@ -1,4 +1,3 @@
-// lib/models/single_servis_status_response.dart
 import 'servis_status_data.dart'; // Import ServisStatusData model
 
 /// Represents the response structure for fetching a single service's status.

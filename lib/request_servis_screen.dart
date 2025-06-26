@@ -1,8 +1,8 @@
 // lib/screens/create_servis_screen.dart
-import 'package:bengkel_app/models/servis_response.dart';
-import 'package:flutter/material.dart';
 import 'package:bengkel_app/constant/app_color.dart';
+import 'package:bengkel_app/models/servis_response.dart';
 import 'package:bengkel_app/services/api_service.dart';
+import 'package:flutter/material.dart';
 
 class CreateServisScreen extends StatefulWidget {
   const CreateServisScreen({super.key});
@@ -42,7 +42,7 @@ class _CreateServisScreenState extends State<CreateServisScreen> {
             backgroundColor: Colors.green,
           ),
         );
-        Navigator.pop(context); // Go back to the previous screen (Home)
+        Navigator.pop(context); // kembali ke halaman home
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -80,7 +80,8 @@ class _CreateServisScreenState extends State<CreateServisScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Request a Service'),
-        backgroundColor: AppColor.blueButton,
+        centerTitle: true,
+        backgroundColor: AppColor.beige8,
         foregroundColor: Colors.white,
       ),
       body: Form(
@@ -100,17 +101,17 @@ class _CreateServisScreenState extends State<CreateServisScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Text(
-                  "New Service Request",
+                  "Service Request",
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    color: AppColor.beige1,
                   ),
                 ),
                 height(12),
                 Text(
                   "Describe your vehicle issue for a service request",
-                  style: TextStyle(fontSize: 14, color: AppColor.gray88),
+                  style: TextStyle(fontSize: 14, color: AppColor.beige2),
                   textAlign: TextAlign.center,
                 ),
                 height(24),
@@ -130,7 +131,7 @@ class _CreateServisScreenState extends State<CreateServisScreen> {
                 buildTitle("Complaint"),
                 height(12),
                 buildTextField(
-                  hintText: "e.g., Mesin berisik saat dinyalakan, Ban kempes",
+                  hintText: "e.g., Mesin berisik saat dinyalakan, dll",
                   controller: _complaintController,
                   maxLines: 3,
                   validator: (value) {
@@ -147,7 +148,7 @@ class _CreateServisScreenState extends State<CreateServisScreen> {
                   child: ElevatedButton(
                     onPressed: _isLoading ? null : _handleCreateServis,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColor.blueButton,
+                      backgroundColor: AppColor.beige8,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(6),
                       ),
@@ -178,7 +179,7 @@ class _CreateServisScreenState extends State<CreateServisScreen> {
       width: double.infinity,
       decoration: const BoxDecoration(
         image: DecorationImage(
-          image: AssetImage("assets/images/background.png"),
+          image: AssetImage("assets/images/background6.jpg"),
           fit: BoxFit.cover,
         ),
       ),
@@ -187,8 +188,7 @@ class _CreateServisScreenState extends State<CreateServisScreen> {
 
   Widget buildTextField({
     String? hintText,
-    bool isPassword =
-        false, // Not used here, but kept for consistency with other screens
+    bool isPassword = false,
     required TextEditingController controller,
     TextInputType keyboardType = TextInputType.text,
     int maxLines = 1,
@@ -198,16 +198,14 @@ class _CreateServisScreenState extends State<CreateServisScreen> {
       controller: controller,
       keyboardType: keyboardType,
       validator: validator,
-      obscureText: isPassword
-          ? false
-          : false, // Always false as it's not a password field
+      obscureText: isPassword ? false : false,
       maxLines: maxLines,
       style: const TextStyle(color: Colors.black),
       decoration: InputDecoration(
         hintText: hintText,
         hintStyle: TextStyle(color: Colors.black.withOpacity(0.5)),
         filled: true,
-        fillColor: Colors.white,
+        fillColor: Colors.white38,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(32),
           borderSide: BorderSide(

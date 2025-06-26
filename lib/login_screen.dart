@@ -1,30 +1,26 @@
-// lib/screens/login_screen_api.dart
+import 'package:bengkel_app/constant/app_color.dart';
+import 'package:bengkel_app/models/login_response.dart';
+import 'package:bengkel_app/services/api_service.dart';
+import 'package:bengkel_app/services/token_manager.dart';
 import 'package:flutter/material.dart';
-import 'package:bengkel_app/constant/app_color.dart'; // Ensure this path is correct
-
-// Import your API service and models
-import 'package:bengkel_app/services/api_service.dart'; // Adjust if your project structure is different
-import 'package:bengkel_app/services/token_manager.dart'; // Adjust if your project structure is different
-import 'package:bengkel_app/models/login_response.dart'; // Adjust if your project structure is different
 
 class LoginScreenApi extends StatefulWidget {
   const LoginScreenApi({super.key});
-  static const String id =
-      "/login_screen_api"; // Define a route ID for navigation
+  static const String id = "/login_screen_api";
 
   @override
   State<LoginScreenApi> createState() => _LoginScreenApiState();
 }
 
 class _LoginScreenApiState extends State<LoginScreenApi> {
-  // State variables for UI and form handling
-  bool isVisibility = false; // For password visibility toggle
+  // State variables untuk ui nya
+  bool isVisibility = false; // untuk password
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final _formKey = GlobalKey<FormState>(); // GlobalKey for form validation
-  bool _isLoading = false; // To show a loading indicator during API calls
+  final _formKey = GlobalKey<FormState>();
+  bool _isLoading = false; // untuk menampilkan loading
 
-  // Instantiate the API service and token manager
+  //  API service and token manager
   final ApiService _apiService = ApiService();
   final TokenManager _tokenManager = TokenManager();
 
@@ -35,15 +31,15 @@ class _LoginScreenApiState extends State<LoginScreenApi> {
     super.dispose();
   }
 
-  /// Handles the login process by calling the API service.
+  /// untuk handle login dengan memanggil layannan API
   Future<void> _handleLogin() async {
-    // Validate form fields
     if (!_formKey.currentState!.validate()) {
-      return; // If validation fails, stop here
+      return;
+      // jika validasi gagal , stop disini
     }
 
     setState(() {
-      _isLoading = true; // Show loading indicator
+      _isLoading = true;
     });
 
     try {
@@ -53,21 +49,12 @@ class _LoginScreenApiState extends State<LoginScreenApi> {
       );
 
       if (response != null && response.data?.token != null) {
-        // Login successful
-        // Token is automatically saved by ApiService internally now.
-        // You might want to save user details too, if your User model contains more info
-        // and you need it globally (e.g., using Provider or Riverpod).
-
         ScaffoldMessenger.of(
           context,
         ).showSnackBar(const SnackBar(content: Text('Login successful!')));
 
-        // Navigate to your main application screen, e.g., HomeScreen
-        // Make sure '/home_screen' is defined in your MaterialApp routes.
-        // Replace with your desired home screen route.
         Navigator.pushReplacementNamed(context, '/home_screen');
       } else {
-        // Login failed (e.g., wrong credentials, API error message)
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
@@ -78,13 +65,12 @@ class _LoginScreenApiState extends State<LoginScreenApi> {
         );
       }
     } catch (e) {
-      // Catch any unexpected errors (e.g., network issues)
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(SnackBar(content: Text('An error occurred: $e')));
     } finally {
       setState(() {
-        _isLoading = false; // Hide loading indicator
+        _isLoading = false;
       });
     }
   }
@@ -93,41 +79,31 @@ class _LoginScreenApiState extends State<LoginScreenApi> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Form(
-        key: _formKey, // Assign the form key
-        child: Stack(
-          children: [
-            buildBackground(), // Renders the background image
-            buildLayer(), // Renders the main content layer
-          ],
-        ),
+        key: _formKey,
+        child: Stack(children: [buildBackground(), buildLayer()]),
       ),
     );
   }
 
-  /// Builds the main content layer including text fields and buttons.
   SafeArea buildLayer() {
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Center(
           child: SingleChildScrollView(
-            // Added SingleChildScrollView to prevent overflow on small screens
+            // menggunakan singleChildScrollview agar menghindari overflow
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Text(
-                  "Welcome Back",
+                  "MECHANIC ",
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ), // Added white color
+                    color: AppColor.beige1,
+                  ),
                 ),
-                height(12),
-                Text(
-                  "Login to access your account",
-                  style: TextStyle(fontSize: 14, color: AppColor.gray88),
-                ),
+
                 height(24),
                 buildTitle("Email Address"),
                 height(12),
@@ -158,7 +134,7 @@ class _LoginScreenApiState extends State<LoginScreenApi> {
                       return 'Please enter your password';
                     }
                     if (value.length < 6) {
-                      // Example: Minimum password length
+                      // untuk minimal password
                       return 'Password must be at least 6 characters long';
                     }
                     return null;
@@ -169,7 +145,6 @@ class _LoginScreenApiState extends State<LoginScreenApi> {
                   alignment: Alignment.centerRight,
                   child: TextButton(
                     onPressed: () {
-                      // TODO: Implement forgot password functionality
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
                           content: Text(
@@ -197,7 +172,7 @@ class _LoginScreenApiState extends State<LoginScreenApi> {
                         ? null
                         : _handleLogin, // Disable button when loading
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColor.blueButton,
+                      backgroundColor: Colors.transparent,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(6),
                       ),
@@ -211,7 +186,7 @@ class _LoginScreenApiState extends State<LoginScreenApi> {
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
-                              color: Colors.white,
+                              color: Colors.black,
                             ),
                           ),
                   ),
@@ -229,7 +204,7 @@ class _LoginScreenApiState extends State<LoginScreenApi> {
                     ),
                     Text(
                       "Or Sign In With",
-                      style: TextStyle(fontSize: 12, color: AppColor.gray88),
+                      style: TextStyle(fontSize: 12, color: Colors.black),
                     ),
                     Expanded(
                       child: Container(
@@ -248,19 +223,16 @@ class _LoginScreenApiState extends State<LoginScreenApi> {
                       backgroundColor: Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(6),
-                        side: const BorderSide(
-                          color: Colors.grey,
-                        ), // Add a border for better visibility
+                        side: const BorderSide(color: Colors.grey),
                       ),
                     ),
                     onPressed: () {
-                      // TODO: Implement Google Sign-In
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
                           content: Text('Google Sign-In not implemented yet.'),
                         ),
                       );
-                      // Navigator.pushNamed(context, "/meet_2"); // This route seems unrelated to API login
+                      // Navigator.pushNamed(context, "/meet_2");
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -274,9 +246,7 @@ class _LoginScreenApiState extends State<LoginScreenApi> {
                         width(4),
                         const Text(
                           "Google",
-                          style: TextStyle(
-                            color: Colors.black,
-                          ), // Set text color for visibility
+                          style: TextStyle(color: AppColor.beige2),
                         ),
                       ],
                     ),
@@ -288,20 +258,17 @@ class _LoginScreenApiState extends State<LoginScreenApi> {
                   children: [
                     Text(
                       "Don't have an account?",
-                      style: TextStyle(fontSize: 12, color: AppColor.gray88),
+                      style: TextStyle(fontSize: 12, color: Colors.black),
                     ),
                     TextButton(
                       onPressed: () {
-                        // Navigate to RegisterScreenAPI
-                        // Ensure RegisterScreenAPI.id is correctly defined and routed in your MaterialApp
-                        // Example: Navigator.pushNamed(context, RegisterScreenAPI.id);
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
                             content: Text('Navigate to Register Screen.'),
                           ),
                         );
-                        // Uncomment the line below when you have RegisterScreenAPI setup as a route
-                        // Navigator.pushNamed(context, RegisterScreenAPI.id);
+
+                        Navigator.pushNamed(context, RegisterScreenAPI.id);
                       },
                       child: Text(
                         "Sign Up",
@@ -322,29 +289,24 @@ class _LoginScreenApiState extends State<LoginScreenApi> {
     );
   }
 
-  /// Builds the background container with an image.
+  /// ini untuk background login
   Container buildBackground() {
     return Container(
       height: double.infinity,
       width: double.infinity,
       decoration: const BoxDecoration(
         image: DecorationImage(
-          image: AssetImage(
-            "assets/images/background.png",
-          ), // Ensure this asset is correctly configured in pubspec.yaml
+          image: AssetImage("assets/images/background8.png"),
           fit: BoxFit.cover,
         ),
       ),
     );
   }
 
-  /// Helper widget for vertical spacing.
   SizedBox height(double height) => SizedBox(height: height);
 
-  /// Helper widget for horizontal spacing.
   SizedBox width(double width) => SizedBox(width: width);
 
-  /// Builds a title text for input fields.
   Widget buildTitle(String text) {
     return Row(
       children: [
@@ -353,29 +315,27 @@ class _LoginScreenApiState extends State<LoginScreenApi> {
     );
   }
 
-  /// Builds a customizable text field.
+  /// menggunakan text fromfield.
   Widget buildTextField({
     String? hintText,
     bool isPassword = false,
     required TextEditingController controller,
-    TextInputType keyboardType = TextInputType.text, // Default to text
-    String? Function(String?)? validator, // Validator function
+    TextInputType keyboardType = TextInputType.text,
+    String? Function(String?)? validator, // fungsi untuk validator
   }) {
     return TextFormField(
       controller: controller,
       keyboardType: keyboardType, // Set keyboard type
-      validator: validator, // Assign validator
+      validator: validator,
       obscureText: isPassword
           ? !isVisibility
-          : false, // Use !isVisibility for obscureText
+          : false, // gunakan !isVisibility untuk obscureText
       style: const TextStyle(color: Colors.black), // Set text color to black
       decoration: InputDecoration(
         hintText: hintText,
-        hintStyle: TextStyle(
-          color: Colors.black.withOpacity(0.5),
-        ), // Hint text color
+        hintStyle: TextStyle(color: Colors.black.withOpacity(0.5)),
         filled: true,
-        fillColor: Colors.white, // Background color for the text field
+        fillColor: Colors.transparent,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(32),
           borderSide: BorderSide(
@@ -394,13 +354,13 @@ class _LoginScreenApiState extends State<LoginScreenApi> {
             width: 1.0,
           ),
         ),
+        // untuk style error
         errorBorder: OutlineInputBorder(
-          // Error border style
           borderRadius: BorderRadius.circular(32),
           borderSide: const BorderSide(color: Colors.red, width: 1.0),
         ),
         focusedErrorBorder: OutlineInputBorder(
-          // Focused error border style
+          // untuk Focused error border
           borderRadius: BorderRadius.circular(32),
           borderSide: const BorderSide(color: Colors.red, width: 2.0),
         ),
@@ -414,7 +374,7 @@ class _LoginScreenApiState extends State<LoginScreenApi> {
                 icon: Icon(
                   isVisibility
                       ? Icons.visibility
-                      : Icons.visibility_off, // Corrected icon logic
+                      : Icons.visibility_off, // icon logic
                   color: AppColor.gray88,
                 ),
               )

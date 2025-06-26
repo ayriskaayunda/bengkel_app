@@ -1,4 +1,3 @@
-// lib/models/login_response.dart
 import 'auth_data.dart'; // Import AuthData model
 
 /// Represents the response structure for user login.
