@@ -101,7 +101,7 @@ class HomeScreen16 extends StatelessWidget {
                   const Text(
                     'Welcome to Ayundaars App!',
                     style: TextStyle(
-                      fontSize: 22,
+                      fontSize: 30,
                       fontWeight: FontWeight.bold,
                       color: AppColor.beige2,
                     ),

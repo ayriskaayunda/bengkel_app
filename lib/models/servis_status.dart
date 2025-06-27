@@ -1,7 +1,3 @@
-// To parse this JSON data, do
-//
-//     final statusServis = statusServisFromJson(jsonString);
-
 import 'dart:convert';
 
 StatusServis statusServisFromJson(String str) =>
@@ -33,3 +29,5 @@ class Data {
 
   Map<String, dynamic> toJson() => {"status": status};
 }
+// model untuk menangani data status dari servis yang dikirim atau diterima dari backend bentuk JSON
+//menampilkan status seperti menunggu , di proses,selesasi

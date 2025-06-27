@@ -98,8 +98,8 @@ class _BookingServisScreenState extends State<BookingServisScreen> {
       appBar: AppBar(
         title: const Text('Book a Service'),
         centerTitle: true,
-        backgroundColor: AppColor.beige8,
-        foregroundColor: Colors.white,
+        backgroundColor: AppColor.beige7,
+        foregroundColor: AppColor.beige2,
       ),
       body: Form(
         key: _formKey,
@@ -173,7 +173,7 @@ class _BookingServisScreenState extends State<BookingServisScreen> {
                   child: ElevatedButton(
                     onPressed: _isLoading ? null : _handleBookingServis,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColor.beige8,
+                      backgroundColor: AppColor.beige7,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(6),
                       ),
@@ -185,7 +185,7 @@ class _BookingServisScreenState extends State<BookingServisScreen> {
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
-                              color: Colors.white,
+                              color: AppColor.beige2,
                             ),
                           ),
                   ),
@@ -204,7 +204,7 @@ class _BookingServisScreenState extends State<BookingServisScreen> {
       width: double.infinity,
       decoration: const BoxDecoration(
         image: DecorationImage(
-          image: AssetImage("assets/images/background6.jpg"),
+          image: AssetImage("assets/images/background11.jpg"),
           fit: BoxFit.cover,
         ),
       ),

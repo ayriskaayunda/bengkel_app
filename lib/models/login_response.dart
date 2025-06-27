@@ -1,17 +1,12 @@
-import 'auth_data.dart'; // Import AuthData model
+import 'auth_data.dart';
 
-/// Represents the response structure for user login.
 class LoginResponse {
-  /// A message indicating the result of the login.
   final String? message;
 
-  /// The authentication data, including token and user details.
   final AuthData? data;
 
-  /// Constructor for the LoginResponse model.
   LoginResponse({this.message, this.data});
 
-  /// Factory constructor to create a LoginResponse object from a JSON map.
   factory LoginResponse.fromJson(Map<String, dynamic> json) {
     return LoginResponse(
       message: json['message'] as String?,
@@ -21,8 +16,9 @@ class LoginResponse {
     );
   }
 
-  /// Converts this LoginResponse object to a JSON map.
   Map<String, dynamic> toJson() {
     return {'message': message, 'data': data?.toJson()};
   }
 }
+//model ini untuk memproses respon dari API saat pengguna login
+//memudahkan komunikasi dengan backend dan menyimpan ke local storage 

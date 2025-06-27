@@ -1,18 +1,12 @@
-// lib/models/register_response.dart
-import 'auth_data.dart'; // Import AuthData model
+import 'auth_data.dart';
 
-/// Represents the response structure for user registration.
 class RegisterResponse {
-  /// A message indicating the result of the registration.
   final String? message;
 
-  /// The authentication data, including token and user details.
   final AuthData? data;
 
-  /// Constructor for the RegisterResponse model.
   RegisterResponse({this.message, this.data});
 
-  /// Factory constructor to create a RegisterResponse object from a JSON map.
   factory RegisterResponse.fromJson(Map<String, dynamic> json) {
     return RegisterResponse(
       message: json['message'] as String?,
@@ -22,8 +16,9 @@ class RegisterResponse {
     );
   }
 
-  /// Converts this RegisterResponse object to a JSON map.
   Map<String, dynamic> toJson() {
     return {'message': message, 'data': data?.toJson()};
   }
 }
+//model ini untuk memproses respon dari API saat pengguna melakukan registrasi 
+//ketika user mendaftar akun ,server akan mengirimkan json yang isinya pesan sukses/eror message 

@@ -1,29 +1,18 @@
-// lib/models/servis.dart
-
-/// Represents a service entry (servis) from the API.
 class Servis {
-  /// Unique identifier for the service.
-  final int? id;
+  final int? id; // id servis di database
 
-  /// The ID of the user associated with this service.
-  final String? userId;
+  final String? userId; //id pengguna yang membuatt servis
 
-  /// The type of vehicle for the service.
-  final String? vehicleType;
+  final String? vehicleType; // jenis kendaraan
 
-  /// The complaint or description of the service issue.
-  final String? complaint;
+  final String? complaint; // keluhan pengguna
 
-  /// The current status of the service (e.g., "Menunggu", "Diproses", "Selesai").
-  final String? status;
+  final String? status; // status servis
 
-  /// The timestamp when the service was created.
-  final DateTime? createdAt;
+  final DateTime? createdAt; // tanggal saat servis dibuat
 
-  /// The timestamp when the service was last updated.
-  final DateTime? updatedAt;
+  final DateTime? updatedAt; // tanggal terakhir kali data servis di perbarui
 
-  /// Constructor for the Servis model.
   Servis({
     this.id,
     this.userId,
@@ -34,7 +23,6 @@ class Servis {
     this.updatedAt,
   });
 
-  /// Factory constructor to create a Servis object from a JSON map.
   factory Servis.fromJson(Map<String, dynamic> json) {
     json.forEach((key, value) {
       print('Key: $key, Value: $value, Type: ${value.runtimeType}');
@@ -55,7 +43,6 @@ class Servis {
     );
   }
 
-  /// Converts this Servis object to a JSON map.
   Map<String, dynamic> toJson() {
     return {
       'id': id,
@@ -68,3 +55,4 @@ class Servis {
     };
   }
 }
+//menyimpan dan mengelola data servis kendaraan , tampilkan list servis ,  tambah/update status.

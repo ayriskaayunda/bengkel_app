@@ -1,11 +1,9 @@
-// lib/screens/my_services_screen.dart
 import 'package:bengkel_app/constant/app_color.dart';
-import 'package:bengkel_app/models/servis.dart'; // Import the Servis model
-import 'package:bengkel_app/models/servis_list_response.dart'; // Import response model
+import 'package:bengkel_app/models/servis.dart';
+import 'package:bengkel_app/models/servis_list_response.dart';
 import 'package:bengkel_app/services/api_service.dart';
 import 'package:flutter/material.dart';
 
-/// Screen to display the user's current and pending service requests.
 class MyServicesScreen extends StatefulWidget {
   const MyServicesScreen({super.key});
   static const String id = "/my_services_screen";
@@ -24,7 +22,6 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
     _fetchServices();
   }
 
-  /// Fetches all service requests from the API.
   Future<void> _fetchServices() async {
     setState(() {
       _servicesFuture = _apiService.getAllServis();
@@ -139,6 +136,9 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
                       servisId: servisId,
                       status: selectedStatus!,
                     );
+
+                    if (!context.mounted) return; // ✅ Cek mounted dulu
+
                     if (response != null && response.message != null) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
@@ -156,6 +156,8 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
                       );
                     }
                   } catch (e) {
+                    if (!context.mounted)
+                      return; // ✅ Cek lagi sebelum pakai context
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Text('Error updating status: $e'),
@@ -188,7 +190,7 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
       appBar: AppBar(
         title: const Text('Service status'),
         centerTitle: true,
-        backgroundColor: AppColor.beige1,
+        backgroundColor: AppColor.beige4,
         foregroundColor: Colors.white,
         actions: [
           IconButton(

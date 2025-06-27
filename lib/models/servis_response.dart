@@ -1,18 +1,12 @@
-// lib/models/create_servis_response.dart
-import 'servis.dart'; // Import Servis model
+import 'servis.dart';
 
-/// Represents the response structure for creating a new service.
 class CreateServisResponse {
-  /// A message indicating the result of the service creation.
   final String? message;
 
-  /// The data of the newly created service.
   final Servis? data;
 
-  /// Constructor for the CreateServisResponse model.
   CreateServisResponse({this.message, this.data});
 
-  /// Factory constructor to create a CreateServisResponse object from a JSON map.
   factory CreateServisResponse.fromJson(Map<String, dynamic> json) {
     return CreateServisResponse(
       message: json['message'] as String?,
@@ -22,8 +16,10 @@ class CreateServisResponse {
     );
   }
 
-  /// Converts this CreateServisResponse object to a JSON map.
   Map<String, dynamic> toJson() {
     return {'message': message, 'data': data?.toJson()};
   }
 }
+//model data yang digunakan untuk menangani respon dari API saat pengguna membuat permintaan servis baru 
+//digunakan untuk pengguna mengisi form servis dan mengirim ke server model ini akan menerima
+// pesan status dari server dan data servis yang baru dibuat (data,berupa objek servis)

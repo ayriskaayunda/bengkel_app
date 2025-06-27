@@ -1,17 +1,13 @@
-import 'user.dart'; // Import the User model
+import 'user.dart';
 
-/// Represents authentication data including a token and user information.
 class AuthData {
-  /// The authentication token.
+  /// ini adalah token autentikasi yang dikirim oleh backend setelah login berhasil
   final String? token;
 
-  /// The user associated with this authentication.
   final User? user;
 
-  /// Constructor for the AuthData model.
   AuthData({this.token, this.user});
 
-  /// Factory constructor to create an AuthData object from a JSON map.
   factory AuthData.fromJson(Map<String, dynamic> json) {
     return AuthData(
       token: json['token'] as String?,
