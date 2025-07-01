@@ -45,7 +45,7 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
               onPressed: () => Navigator.of(context).pop(true),
               child: const Text(
                 'Delete',
-                style: TextStyle(color: AppColor.beige6),
+                style: TextStyle(color: AppColor.beige2),
               ),
             ),
           ],
@@ -88,7 +88,7 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
 
   // ini untuk menampilkan dialog untuk mmemperbarui layanan
   Future<void> _updateServiceStatus(int servisId, String currentStatus) async {
-    String? selectedStatus = currentStatus; // Initialize with current status
+    String? selectedStatus = currentStatus;
     await showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -127,7 +127,7 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
             ElevatedButton(
               onPressed: () async {
                 if (selectedStatus != null && selectedStatus != currentStatus) {
-                  Navigator.of(context).pop(); // Close the dialog first
+                  Navigator.of(context).pop();
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text('Updating service status...')),
                   );
@@ -137,7 +137,7 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
                       status: selectedStatus!,
                     );
 
-                    if (!context.mounted) return; // ✅ Cek mounted dulu
+                    if (!context.mounted) return;
 
                     if (response != null && response.message != null) {
                       ScaffoldMessenger.of(context).showSnackBar(
@@ -156,8 +156,7 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
                       );
                     }
                   } catch (e) {
-                    if (!context.mounted)
-                      return; // ✅ Cek lagi sebelum pakai context
+                    if (!context.mounted) return;
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Text('Error updating status: $e'),

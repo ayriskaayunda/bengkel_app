@@ -16,4 +16,6 @@ class AppColor {
   static const Color beige6 = Color(0xffA67B5B);
   static const Color beige7 = Color(0xffEAE4D5);
   static const Color beige8 = Color(0xff948979);
+  static const Color beige9 = Color(0xffEAE4D5);
+  static const Color beige10 = Color(0xff948979);
 }

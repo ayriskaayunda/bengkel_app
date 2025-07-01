@@ -17,9 +17,9 @@ class VehicleCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 180, // Fixed width for the card
+      width: 180,
       decoration: BoxDecoration(
-        color: const Color(0xFF2C2C4A), // Card background
+        color: const Color(0xFF2C2C4A),
         borderRadius: BorderRadius.circular(12),
       ),
       child: Column(
@@ -57,7 +57,7 @@ class VehicleCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  vehicleName, // Display vehicle name here
+                  vehicleName,
                   style: TextStyle(
                     color: Colors.white.withOpacity(0.8),
                     fontSize: 14,

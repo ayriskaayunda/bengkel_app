@@ -81,7 +81,7 @@ class _CreateServisScreenState extends State<CreateServisScreen> {
       appBar: AppBar(
         title: const Text('Request a Service'),
         centerTitle: true,
-        backgroundColor: AppColor.beige8,
+        backgroundColor: AppColor.beige4,
         foregroundColor: Colors.white,
       ),
       body: Form(
@@ -148,7 +148,7 @@ class _CreateServisScreenState extends State<CreateServisScreen> {
                   child: ElevatedButton(
                     onPressed: _isLoading ? null : _handleCreateServis,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColor.beige8,
+                      backgroundColor: AppColor.beige4,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(6),
                       ),
@@ -160,7 +160,7 @@ class _CreateServisScreenState extends State<CreateServisScreen> {
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
-                              color: Colors.white,
+                              color: AppColor.beige2,
                             ),
                           ),
                   ),
@@ -179,7 +179,7 @@ class _CreateServisScreenState extends State<CreateServisScreen> {
       width: double.infinity,
       decoration: const BoxDecoration(
         image: DecorationImage(
-          image: AssetImage("assets/images/background6.jpg"),
+          image: AssetImage("assets/images/background17.png"),
           fit: BoxFit.cover,
         ),
       ),

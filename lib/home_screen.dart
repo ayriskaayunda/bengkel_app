@@ -30,7 +30,7 @@ class HomeScreen16 extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppColor.beige7,
+        backgroundColor: AppColor.beige5,
         title: const Text('Home of Mechanic'),
         foregroundColor: AppColor.beige2,
         centerTitle: true,
@@ -75,7 +75,10 @@ class HomeScreen16 extends StatelessWidget {
               if (shouldLogout == true) {
                 await apiService.logout();
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Berhasil logout!')),
+                  const SnackBar(
+                    content: Text('Berhasil logout!'),
+                    backgroundColor: Colors.green,
+                  ),
                 );
                 Navigator.pushAndRemoveUntil(
                   context,

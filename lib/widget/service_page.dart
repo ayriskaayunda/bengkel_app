@@ -17,9 +17,9 @@ class ServiceCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 180, // Fixed width for the card
+      width: 180,
       decoration: BoxDecoration(
-        color: const Color(0xFF2C2C4A), // Card background
+        color: const Color(0xFF2C2C4A),
         borderRadius: BorderRadius.circular(12),
       ),
       child: Column(

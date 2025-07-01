@@ -110,15 +110,15 @@ class _RegisterScreenApiState extends State<RegisterScreenApi> {
                 const Text(
                   "Register",
                   style: TextStyle(
-                    fontSize: 24,
+                    fontSize: 30,
                     fontWeight: FontWeight.bold,
-                    color: Color.fromARGB(255, 94, 78, 73),
+                    color: AppColor.beige2,
                   ),
                 ),
                 height(12),
                 Text(
                   "Register your account",
-                  style: TextStyle(fontSize: 14, color: AppColor.gray88),
+                  style: TextStyle(fontSize: 17, color: AppColor.beige2),
                 ),
                 height(24),
                 buildTitle("Email Address"),
@@ -225,7 +225,7 @@ class _RegisterScreenApiState extends State<RegisterScreenApi> {
                   children: [
                     Text(
                       "Have an account?",
-                      style: TextStyle(fontSize: 12, color: AppColor.gray88),
+                      style: TextStyle(fontSize: 12, color: AppColor.beige2),
                     ),
                     TextButton(
                       onPressed: () {
@@ -235,7 +235,7 @@ class _RegisterScreenApiState extends State<RegisterScreenApi> {
                       child: Text(
                         "Sign In",
                         style: TextStyle(
-                          color: AppColor.blueButton,
+                          color: AppColor.beige2,
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
                         ),
@@ -272,7 +272,7 @@ class _RegisterScreenApiState extends State<RegisterScreenApi> {
   Widget buildTitle(String text) {
     return Row(
       children: [
-        Text(text, style: TextStyle(fontSize: 12, color: AppColor.gray88)),
+        Text(text, style: TextStyle(fontSize: 12, color: AppColor.beige2)),
       ],
     );
   }

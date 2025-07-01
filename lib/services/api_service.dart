@@ -16,13 +16,14 @@ import 'package:http/http.dart' as http;
 class ApiService {
   static const String _baseUrl = "https://appbengkel.mobileprojp.com";
 
-  //  TokenManager
+  //  TokenManager untuk  menyimpan dan  mengambil token otentikasi secara lokal
   final TokenManager _tokenManager = TokenManager();
 
   /// Helper function to handle common API request logic and error reporting.
   /// menerima URL endpoint, metode HTTP, body request, dan mengembalikan
   /// The token is now automatically retrieved from TokenManager.
   Future<Map<String, dynamic>?> _sendRequest({
+    // fungsi ini adalah helper utama yang mengirim permintaan HTTP ke server.
     required String endpoint,
     required String method,
     Map<String, dynamic>? body,
@@ -149,7 +150,7 @@ class ApiService {
   /// Books a new service. Requires an authentication token.
   /// Returns a [BookingServisResponse] object on success, null on failure.
   Future<BookingServisResponse?> bookServis({
-    required String bookingDate, // Format: YYYY-MM-DD
+    required String bookingDate, // dengan Format: YYYY-MM-DD
     required String vehicleType,
     required String description,
   }) async {

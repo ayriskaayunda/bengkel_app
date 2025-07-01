@@ -49,9 +49,12 @@ class _LoginScreenApiState extends State<LoginScreenApi> {
       );
 
       if (response != null && response.data?.token != null) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(const SnackBar(content: Text('Login successful!')));
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Login successful!'),
+            backgroundColor: Colors.green,
+          ),
+        );
 
         Navigator.pushReplacementNamed(context, '/home_screen');
       } else {
@@ -98,7 +101,7 @@ class _LoginScreenApiState extends State<LoginScreenApi> {
                 const Text(
                   "MECHANIC ",
                   style: TextStyle(
-                    fontSize: 24,
+                    fontSize: 30,
                     fontWeight: FontWeight.bold,
                     color: AppColor.beige1,
                   ),
@@ -220,7 +223,7 @@ class _LoginScreenApiState extends State<LoginScreenApi> {
                   height: 48,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.white,
+                      backgroundColor: Colors.transparent,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(6),
                         side: const BorderSide(color: Colors.grey),
@@ -246,7 +249,7 @@ class _LoginScreenApiState extends State<LoginScreenApi> {
                         width(4),
                         const Text(
                           "Google",
-                          style: TextStyle(color: AppColor.beige2),
+                          style: TextStyle(color: Colors.black),
                         ),
                       ],
                     ),
@@ -310,7 +313,7 @@ class _LoginScreenApiState extends State<LoginScreenApi> {
   Widget buildTitle(String text) {
     return Row(
       children: [
-        Text(text, style: TextStyle(fontSize: 12, color: AppColor.gray88)),
+        Text(text, style: TextStyle(fontSize: 12, color: AppColor.beige2)),
       ],
     );
   }
